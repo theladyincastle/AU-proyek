@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Story;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('pages.home', [ // Sesuaikan path dengan folder "pages"
+        'stories' => Story::latest()->take(6)->get(),
+        'latestStories' => Story::latest()->take(5)->get()
+    ]);
+})->name('home');
